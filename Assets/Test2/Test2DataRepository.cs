@@ -2,6 +2,6 @@ using System;
 using UnityEngine;                                                    
                                                                       
 [CreateAssetMenu(                                                     
-    fileName = "DataRepository",                                  
-    menuName = "Game Data Repository/DataRepository")]     
-public class DataRepository : Lion.RepositoryBase<Data> { } 
+    fileName = "Test2DataRepository",                                  
+    menuName = "Game Data Repository/Test2DataRepository")]            
+public class Test2DataRepository : Lion.RepositoryBase<Test2Data> { } 

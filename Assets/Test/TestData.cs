@@ -1,4 +1,4 @@
 using System;                                    
 using UnityEngine;                               
                                                  
-public class Data : ScriptableObject { } 
+public class TestData : ScriptableObject { } 

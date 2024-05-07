@@ -2,5 +2,5 @@
 using System;                                                   
 using UnityEngine;                                              
                                                                 
-public class RepositoryWindowLayout : Lion.WindowLayout<Data> { } 
+public class TestRepositoryWindowLayout : Lion.WindowLayout<TestData> { } 
 #endif                                                          
