@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Lion
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(
+        fileName = "SampleDataRepository",
+        menuName = "Game Data Repository/SampleDataRepository")]
     public class SampleDataRepository : RepositoryBase<SampleData> { }
 }
