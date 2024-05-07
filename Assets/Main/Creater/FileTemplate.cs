@@ -26,19 +26,19 @@ public static class FileTemplate
         $"public class {layoutName} : Lion.WindowLayout<{dataName}> {{ }} \r\n" +
         $"#endif                                                          \r\n";
 
-    public static string Window(string windowName, string dataName, string layoutName) =>
-        $"#if UNITY_EDITOR                                                                \r\n" +
-        $"using System;                                                                   \r\n" +
-        $"using UnityEditor;                                                              \r\n" +
-        $"using UnityEngine;                                                              \r\n" +
-        $"                                                                                \r\n" +
-        $"public class {windowName} : Lion.RepositoryWindowBase<{dataName}, {layoutName}> \r\n" +
-        $"{{                                                                              \r\n" +
-        $"    [MenuItem(\"Window/{windowName}\")]                                         \r\n" +
-        $"    static void Init()                                                          \r\n" +
-        $"    {{                                                                          \r\n" +
-        $"        GetWindow(typeof({windowName})).Show();                                 \r\n" +
-        $"    }}                                                                          \r\n" +
-        $"}}                                                                              \r\n" +
-        $"#endif                                                                          \r\n";
+    public static string Window(string windowName, string dataName,string repositoryName, string layoutName) =>
+        $"#if UNITY_EDITOR                                                                                  \r\n" +
+        $"using System;                                                                                     \r\n" +
+        $"using UnityEditor;                                                                                \r\n" +
+        $"using UnityEngine;                                                                                \r\n" +
+        $"                                                                                                  \r\n" +
+        $"public class {windowName} : Lion.RepositoryWindowBase<{dataName}, {repositoryName}, {layoutName}> \r\n" +
+        $"{{                                                                                                \r\n" +
+        $"    [MenuItem(\"Window/Game Data Repository/{windowName}\")]                                      \r\n" +
+        $"    static void Init()                                                                            \r\n" +
+        $"    {{                                                                                            \r\n" +
+        $"        GetWindow(typeof({windowName})).Show();                                                   \r\n" +
+        $"    }}                                                                                            \r\n" +
+        $"}}                                                                                                \r\n" +
+        $"#endif                                                                                            \r\n";
 }

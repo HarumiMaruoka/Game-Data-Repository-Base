@@ -12,7 +12,7 @@ namespace Lion
     {
         [SerializeField]
         private List<T> _collection;
-        public IReadOnlyList<T> Collection => _collection;
+        public IReadOnlyList<T> Collection => _collection ??= new List<T>();
 
         [HideInInspector]
         [SerializeField]

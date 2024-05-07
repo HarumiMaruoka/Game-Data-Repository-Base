@@ -3,12 +3,12 @@ using System;
 using UnityEditor;                                                                                
 using UnityEngine;                                                                                
                                                                                                   
-public class Test2DataWindow : Lion.RepositoryWindowBase<Test2Data, Test2DataRepository, Test2RepositoryWindowLayout> 
+public class Test3DataWindow : Lion.RepositoryWindowBase<Test3Data, Test3DataRepository, Test3RepositoryWindowLayout> 
 {                                                                                                
-    [MenuItem("Window/Game Data Repository/Test2DataWindow")]                                      
+    [MenuItem("Window/Game Data Repository/Test3DataWindow")]                                      
     static void Init()                                                                            
     {                                                                                            
-        GetWindow(typeof(Test2DataWindow)).Show();                                                   
+        GetWindow(typeof(Test3DataWindow)).Show();                                                   
     }                                                                                            
 }                                                                                                
 #endif                                                                                            

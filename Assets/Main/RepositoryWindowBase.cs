@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Lion
 {
-    public class RepositoryWindowBase<DataType, WindowLayoutType> : EditorWindow
+    public class RepositoryWindowBase<DataType, RepositoryType, WindowLayoutType> : EditorWindow
         where DataType : ScriptableObject
+        where RepositoryType : RepositoryBase<DataType>
         where WindowLayoutType : WindowLayout<DataType>
     {
         private RepositoryBase<DataType> _dataRepository;
@@ -14,6 +15,8 @@ namespace Lion
 
         private void OnEnable()
         {
+            _dataRepository = AssetFinder.FindAssetsByType<RepositoryType>();
+
             Undo.undoRedoPerformed += () =>
             {
                 Show();
@@ -26,7 +29,7 @@ namespace Lion
         {
             _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
 
-            _dataRepository = EditorGUILayout.ObjectField("Target", _dataRepository, typeof(RepositoryBase<DataType>), false) as RepositoryBase<DataType>;
+            _dataRepository = EditorGUILayout.ObjectField("Target", _dataRepository, typeof(RepositoryType), false) as RepositoryType;
             if (_dataRepository)
             {
                 if (!_dataRepository.WindowLayout)

@@ -22,9 +22,15 @@ namespace Lion
         private static string _windowName = "DataWindow";
         private static string _path;
 
-        private static string _createFlagKey = "CreateFlag";
-        private static string _pathKey = "AssetPath";
-        private static string _repositoryNameKey = "RepositoryName";
+        private static bool _autoCrate = true;
+        private static bool _autoShow = true;
+
+        private readonly static string _autoCrateKey = "AutoCrate";
+        private readonly static string _autoShowKey = "AutoShow";
+
+        private readonly static string _pathKey = "AssetPath";
+        private readonly static string _repositoryNameKey = "RepositoryName";
+        private readonly static string _windowNameKey = "WindowName";
 
         private void OnEnable()
         {
@@ -32,6 +38,11 @@ namespace Lion
             _dataRepositoryName = "DataRepository";
             _windowLayout = "RepositoryWindowLayout";
             _windowName = "DataWindow";
+
+            var rect = this.position;
+            rect.width = 640f;
+            rect.height = 220f;
+            this.position = rect;
         }
 
         private void OnGUI()
@@ -50,6 +61,18 @@ namespace Lion
             InputFileName("Window Name: ", ref _windowName);
             // Path入力フィールド
             InputPath();
+            // CSharpファイル生成後、自動でアセットを生成するかどうか。
+            EditorGUILayout.BeginHorizontal();
+            _autoCrate = EditorGUILayout.Toggle(_autoCrate, GUILayout.Width(15f));
+            EditorGUILayout.LabelField("Generate repository assets automatically after recompilation is complete.");
+            EditorGUILayout.EndHorizontal();
+
+            // CSharpファイル生成後、自動でウィンドウを開くかどうか。
+            EditorGUILayout.BeginHorizontal();
+            _autoShow = EditorGUILayout.Toggle(_autoShow, GUILayout.Width(15f));
+            EditorGUILayout.LabelField("Display the repository window automatically after recompilation is complete.");
+            EditorGUILayout.EndHorizontal();
+
             // Createフィールド
             InputCreateButton();
         }
@@ -62,7 +85,7 @@ namespace Lion
 
             var emptyLabel = new GUIContent();
             var old = _common;
-            _common = EditorGUILayout.TextField(emptyLabel, _common, GUILayout.Width(220f));
+            _common = EditorGUILayout.TextField(emptyLabel, _common);
             if (old != _common)
             {
                 _dataName = _common + "Data";
@@ -71,6 +94,8 @@ namespace Lion
                 _windowName = _common + "DataWindow";
                 _path = _common;
             }
+
+            EditorGUILayout.LabelField("", GUILayout.Width(25f));
 
             EditorGUILayout.EndHorizontal();
         }
@@ -82,9 +107,9 @@ namespace Lion
             EditorGUILayout.LabelField(label, GUILayout.Width(108f));
 
             var emptyLabel = new GUIContent();
-            fileName = EditorGUILayout.TextField(emptyLabel, fileName, GUILayout.Width(220f));
+            fileName = EditorGUILayout.TextField(emptyLabel, fileName);
 
-            EditorGUILayout.LabelField(".cs", GUILayout.Width(50f));
+            EditorGUILayout.LabelField(".cs", GUILayout.Width(25f));
 
             EditorGUILayout.EndHorizontal();
         }
@@ -93,8 +118,14 @@ namespace Lion
         {
             EditorGUILayout.BeginHorizontal();
 
-            EditorGUILayout.LabelField($"Path: {Application.dataPath}/");
-            _path = EditorGUILayout.TextField(new GUIContent(), _path);
+            GUIStyle labelStyle = GUI.skin.label;
+            GUIContent labelContent = new GUIContent($"Path: {Application.dataPath}/");
+            Vector2 labelSize = labelStyle.CalcSize(labelContent);
+
+
+            EditorGUILayout.LabelField($"Path: {Application.dataPath}/", GUILayout.Width(labelSize.x));
+            _path = EditorGUILayout.TextField(_path);
+            EditorGUILayout.LabelField("", GUILayout.Width(25f));
 
             EditorGUILayout.EndHorizontal();
         }
@@ -115,12 +146,14 @@ namespace Lion
                 // Create WindowLayout.cs file.
                 FileCreator.CreateCSharpFile(AdjustedLayoutPath, FileTemplate.WindowLayout(_windowLayout, _dataName));
                 // Create WindowName.cs file.
-                FileCreator.CreateCSharpFile(AdjustedWindowPath, FileTemplate.Window(_windowName, _dataName, _windowLayout));
+                FileCreator.CreateCSharpFile(AdjustedWindowPath, FileTemplate.Window(_windowName, _dataName, _dataRepositoryName, _windowLayout));
 
                 // Save
-                EditorPrefs.SetBool(_createFlagKey, true);
+                EditorPrefs.SetBool(_autoCrateKey, _autoCrate);
+                EditorPrefs.SetBool(_autoShowKey, _autoShow);
                 EditorPrefs.SetString(_pathKey, _path);
                 EditorPrefs.SetString(_repositoryNameKey, _dataRepositoryName);
+                EditorPrefs.SetString(_windowNameKey, _windowName);
 
                 AssetDatabase.Refresh();
                 Close();
@@ -130,9 +163,10 @@ namespace Lion
         [DidReloadScripts]
         private static void OnScriptsReloaded()
         {
-            if (EditorPrefs.GetBool(_createFlagKey))
+            var autoCreate = EditorPrefs.GetBool(_autoCrateKey);
+            if (autoCreate)
             {
-                EditorPrefs.SetBool(_createFlagKey, false);
+                EditorPrefs.SetBool(_autoCrateKey, false);
                 var repositoryName = EditorPrefs.GetString(_repositoryNameKey);
                 var path = Path.Combine("Assets", EditorPrefs.GetString(_pathKey));
 
@@ -140,6 +174,14 @@ namespace Lion
 
                 var fileName = repositoryName + ".asset";
                 if (instance) AssetDatabase.CreateAsset(instance, Path.Combine(path, fileName));
+            }
+
+            var autoShow = EditorPrefs.GetBool(_autoShowKey);
+            if (autoShow)
+            {
+                EditorPrefs.SetBool(_autoShowKey, false);
+                var windowTypeName = EditorPrefs.GetString(_windowNameKey);
+                EditorApplication.ExecuteMenuItem($"Window/Game Data Repository/{windowTypeName}");
             }
         }
     }
