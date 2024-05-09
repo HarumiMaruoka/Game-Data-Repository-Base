@@ -21,7 +21,7 @@ namespace Lion.GameDataSheet
         private static string _dataName = "Data";
         private static string _sheetName = "Sheet";
         private static string _windowLayout = "SheetWindowLayout";
-        private static string _windowName = "DataWindow";
+        private static string _windowName = "SheetWindow";
         private static string _path;
 
         private static bool _autoCrate = true;
@@ -39,7 +39,7 @@ namespace Lion.GameDataSheet
             _dataName = "Data";
             _sheetName = "Sheet";
             _windowLayout = "SheetWindowLayout";
-            _windowName = "DataWindow";
+            _windowName = "SheetWindow";
 
             var rect = this.position;
             rect.width = 640f;
@@ -93,7 +93,7 @@ namespace Lion.GameDataSheet
                 _dataName = _common + "Data";
                 _sheetName = _common + "Sheet";
                 _windowLayout = _common + "SheetWindowLayout";
-                _windowName = _common + "DataWindow";
+                _windowName = _common + "SheetWindow";
                 _path = _common;
             }
 
@@ -144,7 +144,7 @@ namespace Lion.GameDataSheet
                 // Create DataName.cs file.
                 FileCreator.CreateCSharpFile(AdjustedDataPath, FileTemplate.Data(_dataName));
                 // Create SheetName.cs file.
-                FileCreator.CreateCSharpFile(AdjustedSheetPath, FileTemplate.Sheet(_sheetName, _dataName));
+                FileCreator.CreateCSharpFile(AdjustedSheetPath, FileTemplate.Sheet(_sheetName, _dataName, _windowName));
                 // Create WindowLayout.cs file.
                 FileCreator.CreateCSharpFile(AdjustedLayoutPath, FileTemplate.WindowLayout(_windowLayout, _dataName));
                 // Create WindowName.cs file.

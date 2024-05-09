@@ -30,7 +30,14 @@ namespace Lion.GameDataSheet
             int counter = 0;
             while (it.NextVisible(false))
             {
-                if (counter == HorizontalSpacings.Count) HorizontalSpacings.Add(50f);
+                if (counter == HorizontalSpacings.Count)
+                {
+                    var guiContent = new GUIContent(it.displayName);
+                    var guiStyle = new GUIStyle(GUI.skin.label);
+                    Vector2 size = guiStyle.CalcSize(guiContent);
+
+                    HorizontalSpacings.Add(size.x);
+                }
                 var labelWidthOption = GUILayout.Width(HorizontalSpacings[counter]);
                 counter++;
 
