@@ -8,7 +8,7 @@ using System.Collections;
 using UnityEditor;
 #endif
 
-namespace Lion
+namespace Lion.GameDataSheet
 {
     public class SheetBase<T> : ScriptableObject, IEnumerable<T> where T : ScriptableObject
     {
@@ -19,7 +19,7 @@ namespace Lion
 #if UNITY_EDITOR
         [HideInInspector]
         [SerializeField]
-        public Lion.WindowLayout<T> WindowLayout;
+        public WindowLayout<T> WindowLayout;
 #endif
 
         public T Create()

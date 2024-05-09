@@ -2,5 +2,5 @@
 using System;
 using UnityEngine;
 
-public class TestSheetWindowLayout : Lion.WindowLayout<TestData> { }
+public class TestSheetWindowLayout : Lion.GameDataSheet.WindowLayout<TestData> { }
 #endif

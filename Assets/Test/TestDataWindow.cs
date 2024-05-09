@@ -3,7 +3,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-public class TestDataWindow : Lion.SheetWindowBase<TestData, TestSheet, TestSheetWindowLayout>
+public class TestDataWindow : Lion.GameDataSheet.SheetWindowBase<TestData, TestSheet, TestSheetWindowLayout>
 {
     [MenuItem("Window/Game Data Sheet/TestDataWindow")]
     static void Init()

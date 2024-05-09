@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Lion
+namespace Lion.GameDataSheet
 {
     public class WindowLayout<T> : ScriptableObject where T : ScriptableObject
     {

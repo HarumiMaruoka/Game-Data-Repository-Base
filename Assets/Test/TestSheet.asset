@@ -1,20 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33ebdff33855057449a696891b660f97, type: 3}
-  m_Name: TestSheet
-  m_EditorClassIdentifier: 
-  _collection: []
-  WindowLayout: {fileID: 8193170104806635188}
---- !u!114 &8193170104806635188
+--- !u!114 &-1800405749275939965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -32,3 +18,17 @@ MonoBehaviour:
   GridLineColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.3}
   GridLineSize: {x: 2.8, y: 2}
   GridLineOffset: {x: 2, y: 21}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ebdff33855057449a696891b660f97, type: 3}
+  m_Name: TestSheet
+  m_EditorClassIdentifier: 
+  _collection: []
+  WindowLayout: {fileID: -1800405749275939965}

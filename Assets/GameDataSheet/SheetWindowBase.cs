@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Lion
+namespace Lion.GameDataSheet
 {
     public class SheetWindowBase<DataType, SheetType, WindowLayoutType> : EditorWindow
         where DataType : ScriptableObject

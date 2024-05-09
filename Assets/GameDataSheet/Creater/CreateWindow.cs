@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
-namespace Lion
+namespace Lion.GameDataSheet
 {
     public class CreateWindow : EditorWindow
     {
