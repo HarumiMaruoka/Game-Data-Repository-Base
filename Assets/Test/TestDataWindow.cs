@@ -1,11 +1,11 @@
-#if UNITY_EDITOR                                                                
+#if UNITY_EDITOR
 using System;
 using UnityEditor;
 using UnityEngine;
 
-public class TestDataWindow : Lion.RepositoryWindowBase<TestData, TestDataRepository, TestRepositoryWindowLayout>
+public class TestDataWindow : Lion.SheetWindowBase<TestData, TestSheet, TestSheetWindowLayout>
 {
-    [MenuItem("Window/TestDataWindow")]
+    [MenuItem("Window/Game Data Sheet/TestDataWindow")]
     static void Init()
     {
         GetWindow(typeof(TestDataWindow)).Show();

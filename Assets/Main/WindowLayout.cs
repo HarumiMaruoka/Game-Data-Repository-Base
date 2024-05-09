@@ -8,7 +8,7 @@ namespace Lion
 {
     public class WindowLayout<T> : ScriptableObject where T : ScriptableObject
     {
-        [field: SerializeReference] public RepositoryBase<T> Repository { get; set; }
+        [field: SerializeReference] public SheetBase<T> Sheet { get; set; }
 
         [SerializeField] public List<float> HorizontalSpacings = new List<float>();
         [SerializeField] public List<float> VerticalSpacings = new List<float>();
@@ -42,19 +42,19 @@ namespace Lion
                 EditorGUILayout.PropertyField(it, new GUIContent(), true, valueWidthOption, heightOption);
             }
             serializedElement.ApplyModifiedProperties();
-            if (GUILayout.Button("Delete")) Repository.Delete(element);
+            if (GUILayout.Button("Delete")) Sheet.Delete(element);
         }
 
         // w’èŠÔŠu‚Å‚’¼•ûŒü‚ÉCollection‚Ì—v‘f‚ğ•`‰æ‚·‚éB
         public void DrawElements()
         {
-            for (int i = 0; i < Repository.Collection.Count; i++)
+            for (int i = 0; i < Sheet.Collection.Count; i++)
             {
-                if (!Repository.Collection[i]) return;
+                if (!Sheet.Collection[i]) return;
                 if (i == VerticalSpacings.Count) VerticalSpacings.Add(20f);
 
                 EditorGUILayout.BeginHorizontal();
-                DrawElement(Repository.Collection[i], VerticalSpacings[i]);
+                DrawElement(Sheet.Collection[i], VerticalSpacings[i]);
                 EditorGUILayout.EndHorizontal();
             }
         }
@@ -82,7 +82,7 @@ namespace Lion
             var y = GridLineOffset.y;
             Handles.DrawLine(new Vector2(GridLineOffset.x, y), new Vector2(totalWidth, y));
 
-            for (int i = 0; i < Repository.Count && i < VerticalSpacings.Count; i++)
+            for (int i = 0; i < Sheet.Count && i < VerticalSpacings.Count; i++)
             {
                 y += VerticalSpacings[i] + GridLineSize.y;
 
@@ -94,7 +94,7 @@ namespace Lion
         {
             var totalHeight = GridLineOffset.y;
 
-            for (int i = 0; i < Repository.Count && i < VerticalSpacings.Count; i++)
+            for (int i = 0; i < Sheet.Count && i < VerticalSpacings.Count; i++)
             {
                 var height = VerticalSpacings[i];
                 totalHeight += height + GridLineSize.y;

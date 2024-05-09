@@ -15,8 +15,16 @@ namespace Lion
                 Directory.CreateDirectory(directory);
             }
 
-            // Write the source code to the file.
-            File.WriteAllText(path, sourceCode);
+            // Remove trailing spaces from each line in the source code.
+            string[] lines = sourceCode.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                lines[i] = lines[i].TrimEnd();
+            }
+            string cleanedSourceCode = string.Join(Environment.NewLine, lines);
+
+            // Write the cleaned source code to the file.
+            File.WriteAllText(path, cleanedSourceCode);
         }
     }
 }

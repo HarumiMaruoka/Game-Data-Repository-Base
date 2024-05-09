@@ -10,7 +10,7 @@ using UnityEditor;
 
 namespace Lion
 {
-    public class RepositoryBase<T> : ScriptableObject, IEnumerable<T> where T : ScriptableObject
+    public class SheetBase<T> : ScriptableObject, IEnumerable<T> where T : ScriptableObject
     {
         [SerializeField]
         private List<T> _collection;

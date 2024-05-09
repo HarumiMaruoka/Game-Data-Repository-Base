@@ -9,7 +9,7 @@ namespace Lion
 {
     public class CreateWindow : EditorWindow
     {
-        [MenuItem("Window/Repository Create Window")]
+        [MenuItem("Window/Game Data Sheet Create Window")]
         static void Init()
         {
             GetWindow(typeof(CreateWindow)).Show();
@@ -18,8 +18,8 @@ namespace Lion
 
         private string _common;
         private static string _dataName = "Data";
-        private static string _dataRepositoryName = "DataRepository";
-        private static string _windowLayout = "RepositoryWindowLayout";
+        private static string _sheetName = "Sheet";
+        private static string _windowLayout = "SheetWindowLayout";
         private static string _windowName = "DataWindow";
         private static string _path;
 
@@ -30,14 +30,14 @@ namespace Lion
         private readonly static string _autoShowKey = "AutoShow";
 
         private readonly static string _pathKey = "AssetPath";
-        private readonly static string _repositoryNameKey = "RepositoryName";
+        private readonly static string _sheetNameKey = "SheetName";
         private readonly static string _windowNameKey = "WindowName";
 
         private void OnEnable()
         {
             _dataName = "Data";
-            _dataRepositoryName = "DataRepository";
-            _windowLayout = "RepositoryWindowLayout";
+            _sheetName = "Sheet";
+            _windowLayout = "SheetWindowLayout";
             _windowName = "DataWindow";
 
             var rect = this.position;
@@ -49,13 +49,13 @@ namespace Lion
         private void OnGUI()
         {
             // タイトル
-            EditorGUILayout.LabelField("Data Repository Create Window");
+            EditorGUILayout.LabelField("Sheet Create Window");
             // CommonValue入力
             InputCommonValue();
             // DataName入力フィールド
             InputFileName("Data Name: ", ref _dataName);
-            // RepositoryName入力フィールド
-            InputFileName("Repository Name: ", ref _dataRepositoryName);
+            // SheetName入力フィールド
+            InputFileName("Sheet Name: ", ref _sheetName);
             // WindowLayout入力フィールド
             InputFileName("Window Layout: ", ref _windowLayout);
             // WindowName入力フィールド
@@ -65,13 +65,13 @@ namespace Lion
             // CSharpファイル生成後、自動でアセットを生成するかどうか。
             EditorGUILayout.BeginHorizontal();
             _autoCrate = EditorGUILayout.Toggle(_autoCrate, GUILayout.Width(15f));
-            EditorGUILayout.LabelField("Generate repository assets automatically after recompilation is complete.");
+            EditorGUILayout.LabelField("Generate sheet assets automatically after recompilation is complete.");
             EditorGUILayout.EndHorizontal();
 
             // CSharpファイル生成後、自動でウィンドウを開くかどうか。
             EditorGUILayout.BeginHorizontal();
             _autoShow = EditorGUILayout.Toggle(_autoShow, GUILayout.Width(15f));
-            EditorGUILayout.LabelField("Display the repository window automatically after recompilation is complete.");
+            EditorGUILayout.LabelField("Display the sheet window automatically after recompilation is complete.");
             EditorGUILayout.EndHorizontal();
 
             // Createフィールド
@@ -90,8 +90,8 @@ namespace Lion
             if (old != _common)
             {
                 _dataName = _common + "Data";
-                _dataRepositoryName = _common + "DataRepository";
-                _windowLayout = _common + "RepositoryWindowLayout";
+                _sheetName = _common + "Sheet";
+                _windowLayout = _common + "SheetWindowLayout";
                 _windowName = _common + "DataWindow";
                 _path = _common;
             }
@@ -132,7 +132,7 @@ namespace Lion
         }
 
         private string AdjustedDataPath => Application.dataPath + "\\" + _path + $"\\{_dataName}.cs";
-        private string AdjustedRepositoryPath => Application.dataPath + "\\" + _path + $"\\{_dataRepositoryName}.cs";
+        private string AdjustedSheetPath => Application.dataPath + "\\" + _path + $"\\{_sheetName}.cs";
         private string AdjustedLayoutPath => Application.dataPath + "\\" + _path + $"\\{_windowLayout}.cs";
         private string AdjustedWindowPath => Application.dataPath + "\\" + _path + $"\\{_windowName}.cs";
 
@@ -142,18 +142,18 @@ namespace Lion
             {
                 // Create DataName.cs file.
                 FileCreator.CreateCSharpFile(AdjustedDataPath, FileTemplate.Data(_dataName));
-                // Create RepositoryName.cs file.
-                FileCreator.CreateCSharpFile(AdjustedRepositoryPath, FileTemplate.DataRepository(_dataRepositoryName, _dataName));
+                // Create SheetName.cs file.
+                FileCreator.CreateCSharpFile(AdjustedSheetPath, FileTemplate.Sheet(_sheetName, _dataName));
                 // Create WindowLayout.cs file.
                 FileCreator.CreateCSharpFile(AdjustedLayoutPath, FileTemplate.WindowLayout(_windowLayout, _dataName));
                 // Create WindowName.cs file.
-                FileCreator.CreateCSharpFile(AdjustedWindowPath, FileTemplate.Window(_windowName, _dataName, _dataRepositoryName, _windowLayout));
+                FileCreator.CreateCSharpFile(AdjustedWindowPath, FileTemplate.Window(_windowName, _dataName, _sheetName, _windowLayout));
 
                 // Save
                 EditorPrefs.SetBool(_autoCrateKey, _autoCrate);
                 EditorPrefs.SetBool(_autoShowKey, _autoShow);
                 EditorPrefs.SetString(_pathKey, _path);
-                EditorPrefs.SetString(_repositoryNameKey, _dataRepositoryName);
+                EditorPrefs.SetString(_sheetNameKey, _sheetName);
                 EditorPrefs.SetString(_windowNameKey, _windowName);
 
                 AssetDatabase.Refresh();
@@ -168,12 +168,12 @@ namespace Lion
             if (autoCreate)
             {
                 EditorPrefs.SetBool(_autoCrateKey, false);
-                var repositoryName = EditorPrefs.GetString(_repositoryNameKey);
+                var sheetName = EditorPrefs.GetString(_sheetNameKey);
                 var path = Path.Combine("Assets", EditorPrefs.GetString(_pathKey));
 
-                var instance = ScriptableObject.CreateInstance(repositoryName);
+                var instance = ScriptableObject.CreateInstance(sheetName);
 
-                var fileName = repositoryName + ".asset";
+                var fileName = sheetName + ".asset";
                 if (instance) AssetDatabase.CreateAsset(instance, Path.Combine(path, fileName));
             }
 
@@ -182,7 +182,7 @@ namespace Lion
             {
                 EditorPrefs.SetBool(_autoShowKey, false);
                 var windowTypeName = EditorPrefs.GetString(_windowNameKey);
-                EditorApplication.ExecuteMenuItem($"Window/Game Data Repository/{windowTypeName}");
+                EditorApplication.ExecuteMenuItem($"Window/Game Data Sheet/{windowTypeName}");
             }
         }
     }
