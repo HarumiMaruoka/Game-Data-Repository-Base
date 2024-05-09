@@ -10,6 +10,7 @@ namespace Lion
     public class CreateWindow : EditorWindow
     {
         [MenuItem("Window/Game Data Sheet Create Window")]
+        [MenuItem("Assets/Create/Game Data Sheet", false, 0)]
         static void Init()
         {
             GetWindow(typeof(CreateWindow)).Show();

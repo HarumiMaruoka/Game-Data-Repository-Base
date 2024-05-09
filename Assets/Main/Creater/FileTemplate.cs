@@ -13,13 +13,13 @@ public static class FileTemplate
         $"}}                                         ";
 
     public static string Sheet(string sheetName, string dataName) =>
-        $"using System;                                               \r\n" +
-        $"using UnityEngine;                                          \r\n" +
-        $"                                                            \r\n" +
-        $"[CreateAssetMenu(                                           \r\n" +
-        $"    fileName = \"{sheetName}\",                             \r\n" +
-        $"    menuName = \"Game Data Sheet/{sheetName}\")]            \r\n" +
-        $"public class {sheetName} : Lion.SheetBase<{dataName}> {{ }} ";
+        $"using System;                                                \r\n" +
+        $"using UnityEngine;                                           \r\n" +
+        $"                                                             \r\n" +
+        $"[CreateAssetMenu(                                            \r\n" +
+        $"    fileName = \"{sheetName}\",                              \r\n" +
+        $"    menuName = \"Game Data Sheets/{sheetName}\")]            \r\n" +
+        $"public class {sheetName} : Lion.SheetBase<{dataName}> {{ }}  ";
 
     public static string WindowLayout(string layoutName, string dataName) =>
         $"#if UNITY_EDITOR                                                \r\n" +

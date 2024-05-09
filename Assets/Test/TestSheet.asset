@@ -1,49 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6069008696002739378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9496b584926263f45a6ecf5c9edbf9c4, type: 3}
-  m_Name: TestSheet (TestSheet)
-  m_EditorClassIdentifier: 
-  <ID>k__BackingField: 0
-  <Name>k__BackingField: 
-  <AttackPower>k__BackingField: 0
-  <Sprite>k__BackingField: {fileID: 0}
---- !u!114 &-3417016122800606495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 173519d93a0ead948807d10059b74253, type: 3}
-  m_Name: LayoutData
-  m_EditorClassIdentifier: 
-  <Sheet>k__BackingField: {fileID: 11400000}
-  HorizontalSpacings:
-  - 15
-  - 35
-  - 35
-  - 60
-  - 80
-  - 40
-  - 35
-  - 100
-  VerticalSpacings:
-  - 20
-  - 20
-  GridLineColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.3}
-  GridLineSize: {x: 2.8, y: 2}
-  GridLineOffset: {x: 2, y: 21}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ebdff33855057449a696891b660f97, type: 3}
   m_Name: TestSheet
   m_EditorClassIdentifier: 
-  _collection:
-  - {fileID: -6069008696002739378}
-  - {fileID: 7722796847807384507}
-  WindowLayout: {fileID: -3417016122800606495}
---- !u!114 &7722796847807384507
+  _collection: []
+  WindowLayout: {fileID: 8193170104806635188}
+--- !u!114 &8193170104806635188
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,10 +23,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9496b584926263f45a6ecf5c9edbf9c4, type: 3}
-  m_Name: TestSheet (TestSheet)
+  m_Script: {fileID: 11500000, guid: 173519d93a0ead948807d10059b74253, type: 3}
+  m_Name: 
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 0
-  <Name>k__BackingField: 
-  <AttackPower>k__BackingField: 0
-  <Sprite>k__BackingField: {fileID: 0}
+  <Sheet>k__BackingField: {fileID: 11400000}
+  HorizontalSpacings: []
+  VerticalSpacings: []
+  GridLineColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.3}
+  GridLineSize: {x: 2.8, y: 2}
+  GridLineOffset: {x: 2, y: 21}
