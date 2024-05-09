@@ -14,8 +14,8 @@ namespace Lion
         [SerializeField] public List<float> VerticalSpacings = new List<float>();
 
         [SerializeField] public Color GridLineColor = new Color(0.5f, 0.5f, 0.5f, 0.3f);
-        [SerializeField] public Vector2 GridSize = new Vector2(2.8f, 2f);
-        [SerializeField] public Vector2 GridOffset = new Vector2(2f, 21f);
+        [SerializeField] public Vector2 GridLineSize = new Vector2(2.8f, 2f);
+        [SerializeField] public Vector2 GridLineOffset = new Vector2(2f, 21f);
 
         // w’èŠÔŠu‚Å…•½•ûŒü‚É“Á’è‚ÌSerializedObject‚Ì—v‘f‚ğ•`‰æ‚·‚éB
         private void DrawElement(T element, float height)
@@ -50,6 +50,7 @@ namespace Lion
         {
             for (int i = 0; i < Repository.Collection.Count; i++)
             {
+                if (!Repository.Collection[i]) return;
                 if (i == VerticalSpacings.Count) VerticalSpacings.Add(20f);
 
                 EditorGUILayout.BeginHorizontal();
@@ -72,74 +73,66 @@ namespace Lion
 
         private void DrawHorizontalLines()
         {
-            var totalWidth = GridOffset.x;
+            var totalWidth = GridLineOffset.x;
             foreach (var width in HorizontalSpacings)
             {
-                totalWidth += width + GridSize.x;
+                totalWidth += width + GridLineSize.x;
             }
 
-            var y = GridOffset.y;
-            Handles.DrawLine(new Vector2(GridOffset.x, y), new Vector2(totalWidth, y));
+            var y = GridLineOffset.y;
+            Handles.DrawLine(new Vector2(GridLineOffset.x, y), new Vector2(totalWidth, y));
 
-            for (int i = 0; i < VerticalSpacings.Count; i++)
+            for (int i = 0; i < Repository.Count && i < VerticalSpacings.Count; i++)
             {
-                y += VerticalSpacings[i] + GridSize.y;
+                y += VerticalSpacings[i] + GridLineSize.y;
 
-                Handles.DrawLine(new Vector2(GridOffset.x, y), new Vector2(totalWidth, y));
+                Handles.DrawLine(new Vector2(GridLineOffset.x, y), new Vector2(totalWidth, y));
             }
         }
 
         private void DrawVerticalLines()
         {
-            var totalHeight = GridOffset.y;
-            foreach (var height in VerticalSpacings)
+            var totalHeight = GridLineOffset.y;
+
+            for (int i = 0; i < Repository.Count && i < VerticalSpacings.Count; i++)
             {
-                totalHeight += height + GridSize.y;
+                var height = VerticalSpacings[i];
+                totalHeight += height + GridLineSize.y;
             }
 
-            var x = GridOffset.x;
-            Handles.DrawLine(new Vector2(x, GridOffset.y), new Vector2(x, totalHeight));
+            var x = GridLineOffset.x;
+            Handles.DrawLine(new Vector2(x, GridLineOffset.y), new Vector2(x, totalHeight));
 
             for (int i = 0; i < HorizontalSpacings.Count; i += 2)
             {
-                x += HorizontalSpacings[i] + HorizontalSpacings[i + 1] + GridSize.x * 2f;
-                Handles.DrawLine(new Vector2(x, GridOffset.y), new Vector2(x, totalHeight));
+                x += HorizontalSpacings[i] + HorizontalSpacings[i + 1] + GridLineSize.x * 2f;
+                Handles.DrawLine(new Vector2(x, GridLineOffset.y), new Vector2(x, totalHeight));
             }
-        }
-
-        private int ElementCount(SerializedObject serializedObject)
-        {
-            int count = 0;
-
-            var it = serializedObject.GetIterator();
-            it.NextVisible(true);
-            while (it.NextVisible(false)) count++;
-
-            return count;
         }
 
         public void DrawValueFields()
         {
-            var a = new SerializedObject(this);
+            if (!this) return;
+            var serializedObject = new SerializedObject(this);
 
-            a.Update();
-            var b = a.FindProperty("HorizontalSpacings");
-            for (int i = 0; i < b.arraySize; i++)
+            serializedObject.Update();
+            var h = serializedObject.FindProperty(nameof(HorizontalSpacings));
+            for (int i = 0; i < h.arraySize; i++)
             {
-                EditorGUILayout.PropertyField(b.GetArrayElementAtIndex(i));
+                EditorGUILayout.PropertyField(h.GetArrayElementAtIndex(i), new GUIContent($"{h.displayName}: {i}"));
             }
 
-            var c = a.FindProperty("VerticalSpacings");
-            for (int i = 0; i < c.arraySize; i++)
+            var v = serializedObject.FindProperty(nameof(VerticalSpacings));
+            for (int i = 0; i < v.arraySize; i++)
             {
-                EditorGUILayout.PropertyField(c.GetArrayElementAtIndex(i));
+                EditorGUILayout.PropertyField(v.GetArrayElementAtIndex(i), new GUIContent($"{v.displayName}: {i}"));
             }
 
-            EditorGUILayout.PropertyField(a.FindProperty("GridLineColor"));
-            EditorGUILayout.PropertyField(a.FindProperty("GridSize"));
-            EditorGUILayout.PropertyField(a.FindProperty("GridOffset"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(GridLineColor)));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(GridLineSize)));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(GridLineOffset)));
 
-            a.ApplyModifiedProperties();
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

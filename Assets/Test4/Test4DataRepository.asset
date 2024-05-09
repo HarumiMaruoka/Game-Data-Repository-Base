@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1108550911993483479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f733cf0c058288459d2fa8c3fe17edb, type: 3}
+  m_Name: Test4DataRepository (Test4DataRepository)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 0
+  <Sprite>k__BackingField: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  <AttackPower>k__BackingField: 444
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80f19af390f4e84a8faae2fd0f35e2e, type: 3}
+  m_Name: Test4DataRepository
+  m_EditorClassIdentifier: 
+  _collection:
+  - {fileID: -1108550911993483479}
+  - {fileID: 5270821839088304197}
+  - {fileID: 7172555216182847634}
+  - {fileID: 618589925051309961}
+  WindowLayout: {fileID: 6077853237373153037}
+--- !u!114 &618589925051309961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f733cf0c058288459d2fa8c3fe17edb, type: 3}
+  m_Name: Test4DataRepository (Test4DataRepository)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 3
+  <Sprite>k__BackingField: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  <AttackPower>k__BackingField: 123
+--- !u!114 &5270821839088304197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f733cf0c058288459d2fa8c3fe17edb, type: 3}
+  m_Name: Test4DataRepository (Test4DataRepository)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 1
+  <Sprite>k__BackingField: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  <AttackPower>k__BackingField: 555
+--- !u!114 &6077853237373153037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782cec330ad414643b5de8b662b8d02f, type: 3}
+  m_Name: LayoutData
+  m_EditorClassIdentifier: 
+  <Repository>k__BackingField: {fileID: 11400000}
+  HorizontalSpacings:
+  - 15
+  - 30
+  - 40
+  - 105
+  - 80
+  - 50
+  VerticalSpacings:
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  GridLineColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.3}
+  GridLineSize: {x: 2.8, y: 2}
+  GridLineOffset: {x: 2, y: 21}
+--- !u!114 &7172555216182847634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f733cf0c058288459d2fa8c3fe17edb, type: 3}
+  m_Name: Test4DataRepository (Test4DataRepository)
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 2
+  <Sprite>k__BackingField: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  <AttackPower>k__BackingField: 111
