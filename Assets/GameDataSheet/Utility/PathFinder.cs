@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEditor;
 
-namespace Lion
+namespace Lion.GameDataSheet
 {
     public class PathFinder : MonoBehaviour
     {
