@@ -14,7 +14,7 @@ namespace Lion.GameDataSheet
         [SerializeField] public List<float> VerticalSpacings = new List<float>();
 
         [SerializeField] public Color GridLineColor = new Color(0.5f, 0.5f, 0.5f, 0.3f);
-        [SerializeField] public Vector2 GridLineSize = new Vector2(2.8f, 2f);
+        [SerializeField] public Vector2 GridLineSize = new Vector2(3f, 2f);
         [SerializeField] public Vector2 GridLineOffset = new Vector2(2f, 21f);
 
         // w’èŠÔŠu‚Å…•½•ûŒü‚É“Á’è‚ÌSerializedObject‚Ì—v‘f‚ğ•`‰æ‚·‚éB
